@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حكاية بيتر وحموكشتي ❤️</title>
+  
+  <!-- Google Fonts: Amiri & Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;800&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Canvas for Ambient Hearts -->
+  <canvas id="heartsCanvas"></canvas>
+
+  <!-- Audio Player Floating Bar -->
+  <div class="music-player-floating" id="musicPlayer">
+    <button class="music-toggle-btn" id="musicToggleBtn" aria-label="تشغيل الموسيقى" title="اضغطي لتشغيل الموسيقى الرومانسية">
+      <span class="music-icon" id="musicIcon">🎵</span>
+      <span class="music-text" id="musicText">موسيقانا الرومانسية</span>
+    </button>
+    <div class="music-equalizer" id="musicEqualizer">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <!-- Hidden HTML5 Audio Element -->
+    <audio id="bgMusic" loop preload="metadata">
+      <source src="music/our-song.mp3" type="audio/mpeg">
+      <source src="music/our-song.ogg" type="audio/ogg">
+    </audio>
+  </div>
+
+  <!-- ==============================================
+       1. شاشة البداية (Screen 1: Welcome & Prompt)
+       ============================================== -->
+  <section id="welcome-screen" class="screen-section active-screen">
+    <div class="romantic-card welcome-card glow-box">
+      <div class="heart-pulse-icon">💖</div>
+      <h1 class="welcome-title">
+        <span class="greeting-highlight">حموكشتي ❤️</span>
+        <br>
+        <span class="sub-greeting">عندي ليكي سؤال صغير...</span>
+      </h1>
+
+      <div class="question-box">
+        <p class="question-text">"فاكرة حكايتنا بدأت إزاي؟"</p>
+      </div>
+
+      <div class="welcome-action">
+        <button id="startJourneyBtn" class="btn-romantic btn-pulse">
+          <span>يلا نفتكر سوا 💗</span>
+        </button>
+      </div>
+      <p class="touch-hint">اضغطي على الزر لتبدأ رحلتنا الرومانسية</p>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       2. رحلة قصة حبنا (Screen 2: Love Story Journey)
+       ============================================== -->
+  <section id="story-section" class="screen-section hidden-screen">
+    
+    <!-- Header with Live Love Counter -->
+    <div class="story-header glow-box">
+      <h2 class="main-title">من يوم 29/9/2022.. بدأت حكايتنا ❤️</h2>
+      <p class="story-subtitle">كل ثانية عدت بيننا.. كانت حكاية حب بتكبر</p>
+      
+      <!-- عدّاد الحب المباشر منذ 29/9/2022 -->
+      <div class="love-counter-box" id="loveCounter">
+        <div class="counter-item">
+          <span class="counter-num" id="countYears">0</span>
+          <span class="counter-label">سنوات</span>
+        </div>
+        <div class="counter-item">
+          <span class="counter-num" id="countDays">0</span>
+          <span class="counter-label">أيام</span>
+        </div>
+        <div class="counter-item">
+          <span class="counter-num" id="countHours">0</span>
+          <span class="counter-label">ساعات</span>
+        </div>
+        <div class="counter-item">
+          <span class="counter-num" id="countMinutes">0</span>
+          <span class="counter-label">دقائق</span>
+        </div>
+        <div class="counter-item">
+          <span class="counter-num" id="countSeconds">0</span>
+          <span class="counter-label">ثواني</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stepper Navigation -->
+    <div class="story-stepper">
+      <div class="step-indicator active" data-step="1"><span>1</span> البداية</div>
+      <div class="step-indicator" data-step="2"><span>2</span> ذكرياتنا</div>
+      <div class="step-indicator" data-step="3"><span>3</span> 4 سنين</div>
+      <div class="step-indicator" data-step="4"><span>4</span> بحب فيكي</div>
+      <div class="step-indicator" data-step="5"><span>5</span> المستقبل</div>
+    </div>
+
+    <!-- Container for Stages -->
+    <div class="stages-container">
+
+      <!-- ==================== المرحلة الأولى: البداية ==================== -->
+      <div class="stage-block active-stage" id="stage-1">
+        <div class="stage-header">
+          <span class="stage-badge">المرحلة الأولى</span>
+          <h3 class="stage-title">البداية 🌸</h3>
+          <p class="stage-date">29 سبتمبر 2022</p>
+        </div>
+
+        <div class="stage-content-grid">
+          <div class="stage-photo-wrapper">
+            <div class="photo-frame romantic-tilt" onclick="openLightbox('images/beginning.jpg', 'أول صورة وشرارة البداية يوم 29/9/2022')">
+              <img id="beginningPhoto" src="images/beginning.jpg" alt="بداية حكايتنا - بيتر وحموكشتي" onerror="handleImageError(this, 'beginning')">
+              <div class="photo-overlay-tag">أول يوم جمعنا ❤️</div>
+            </div>
+          </div>
+
+          <div class="stage-text-wrapper">
+            <div class="romantic-text-card">
+              <h4 class="card-subtitle">اليوم اللي غير مسار حياتي كلها..</h4>
+              <p>
+                يوم 29 سبتمبر 2022 مكانش مجرد يوم عادي في النتيجة، ده كان اليوم اللي حكايتنا اتكتبت فيه أول سطر.
+                من أول لحظة اتكلمنا فيها، حسيت بإحساس مختلف ممرش عليا قبل كده، راحة وطيبة وبداية دافية دخلت قلبي وسكنت فيه.
+              </p>
+              <p>
+                مهما مرت الأيام والشهور، هيفضل تاريخ 29/9 محفور في قلبي كأغلى تاريخ وأجمل بداية كتبها القدر.
+              </p>
+            </div>
+            <div class="stage-actions">
+              <button class="btn-romantic next-stage-btn" onclick="goToStage(2)">
+                <span>المرحلة التالية: ذكرياتنا الحلوة 📸</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== المرحلة الثانية: ذكرياتنا الحلوة ==================== -->
+      <div class="stage-block hidden-stage" id="stage-2">
+        <div class="stage-header">
+          <span class="stage-badge">المرحلة الثانية</span>
+          <h3 class="stage-title">ذكرياتنا الحلوة 📸</h3>
+          <p class="stage-subtitle">كل صورة بيننا وراها ضحكة، وحكاية، ولحظة حقيقية عشناها سوا</p>
+          <p class="gallery-hint">💡 اضغطي على أي صورة لتكبيرها ومشاهدة تفاصيلها والتعليق عليها</p>
+        </div>
+
+        <!-- المعرض التفاعلي -->
+        <div class="gallery-grid" id="memoriesGallery">
+          <!-- بطاقة صورة 1 -->
+          <div class="gallery-card" onclick="openLightbox('images/memory1.jpg', 'ضحكتك دي هي اللي بتنور أيامي.. أحلى ذكرى عشناها سوا ❤️')">
+            <div class="gallery-img-container">
+              <img src="images/memory1.jpg" alt="ذكرى جميلة 1" onerror="handleImageError(this, 'memory1')">
+            </div>
+            <div class="gallery-caption">
+              <span class="caption-heart">❤️</span>
+              <p>ضحكتك اللي بتنور أيامي</p>
+            </div>
+          </div>
+
+          <!-- بطاقة صورة 2 -->
+          <div class="gallery-card" onclick="openLightbox('images/memory2.jpg', 'في كل مرة بكون معاكي بحس إن الدنيا كلها بخير وهادية 🌸')">
+            <div class="gallery-img-container">
+              <img src="images/memory2.jpg" alt="ذكرى جميلة 2" onerror="handleImageError(this, 'memory2')">
+            </div>
+            <div class="gallery-caption">
+              <span class="caption-heart">❤️</span>
+              <p>لحظات الراحة والأمان معاكي</p>
+            </div>
+          </div>
+
+          <!-- بطاقة صورة 3 -->
+          <div class="gallery-card" onclick="openLightbox('images/memory3.jpg', 'اليوم ده من أكتر الأيام اللي مش هنساها، كل تفصيلة فيه بتفكرني بحبك ✨')">
+            <div class="gallery-img-container">
+              <img src="images/memory3.jpg" alt="ذكرى جميلة 3" onerror="handleImageError(this, 'memory3')">
+            </div>
+            <div class="gallery-caption">
+              <span class="caption-heart">❤️</span>
+              <p>يوم مميز مش بيتنسي</p>
+            </div>
+          </div>
+
+          <!-- بطاقة صورة 4 -->
+          <div class="gallery-card" onclick="openLightbox('images/memory4.jpg', 'ملامحك البريئة اللي خطفت قلبي من أول نظرة ولسه خطفاه لحد النهاردة 💕')">
+            <div class="gallery-img-container">
+              <img src="images/memory4.jpg" alt="ذكرى جميلة 4" onerror="handleImageError(this, 'memory4')">
+            </div>
+            <div class="gallery-caption">
+              <span class="caption-heart">❤️</span>
+              <p>ملامحك اللي خطفت قلبي</p>
+            </div>
+          </div>
+
+          <!-- بطاقة صورة 5 -->
+          <div class="gallery-card" onclick="openLightbox('images/memory5.jpg', 'وسط زحمة الدنيا، إنتِ المكان الوحيد اللي بهرب ليه وبرتاح فيه 🕊️')">
+            <div class="gallery-img-container">
+              <img src="images/memory5.jpg" alt="ذكرى جميلة 5" onerror="handleImageError(this, 'memory5')">
+            </div>
+            <div class="gallery-caption">
+              <span class="caption-heart">❤️</span>
+              <p>مكان راحتي وملاذي</p>
+            </div>
+          </div>
+
+          <!-- بطاقة صورة 6 -->
+          <div class="gallery-card" onclick="openLightbox('images/memory6.jpg', 'أحلى المشاوير والحكايات اللي عشناها سوا.. ولسه ياما هنعمل ذكريات جديدة 🥰')">
+            <div class="gallery-img-container">
+              <img src="images/memory6.jpg" alt="ذكرى جميلة 6" onerror="handleImageError(this, 'memory6')">
+            </div>
+            <div class="gallery-caption">
+              <span class="caption-heart">❤️</span>
+              <p>حكايات ومشاوير متتنسيش</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-actions">
+          <button class="btn-romantic-outline" onclick="goToStage(1)">السابق</button>
+          <button class="btn-romantic next-stage-btn" onclick="goToStage(3)">
+            <span>المرحلة التالية: أربع سنين من الحكايات ⏳</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ==================== المرحلة الثالثة: أربع سنين من الحكايات ==================== -->
+      <div class="stage-block hidden-stage" id="stage-3">
+        <div class="stage-header">
+          <span class="stage-badge">المرحلة الثالثة</span>
+          <h3 class="stage-title">أربع سنين من الحكايات ⏳</h3>
+          <p class="stage-subtitle">رحلة 4 سنوات كاملة من 2022 إلى 2026.. خطوة بخطوة وإيد في إيد</p>
+        </div>
+
+        <!-- الخط الزمني للذكريات -->
+        <div class="timeline-container">
+          
+          <div class="timeline-item">
+            <div class="timeline-dot">2022</div>
+            <div class="timeline-card">
+              <span class="timeline-date">29 سبتمبر 2022</span>
+              <h4 class="timeline-heading">شرارة البداية وأجمل صدفة ❤️</h4>
+              <p>
+                اليوم اللي بدأت فيه حكايتنا الرسمية. دخلتي حياتي وغيرتي كل حساباتي، وبدأت أكتشف إنسانة ملهاش شبه في نقائها وضحكتها.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">2023</div>
+            <div class="timeline-card">
+              <span class="timeline-date">سنة الاكتشاف والضحك</span>
+              <h4 class="timeline-heading">أولى الذكريات وتفاصيلنا المشتركة 🌸</h4>
+              <p>
+                سنة كاملة اتعلمنا فيها نفهم بعض، ضحكنا فيها كتير وعملنا أول ذكريات ومشاوير سوا، وبدأ كل تفصيل فيكي يبقى عزيز على قلبي.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">2024</div>
+            <div class="timeline-card">
+              <span class="timeline-date">سنة النضج والاختيار</span>
+              <h4 class="timeline-heading">عواصف ومواقف عدت.. وقربتنا أكتر 🤝</h4>
+              <p>
+                أيام كانت سهلة وأيام كانت صعبة، زعلنا وصالحنا بعض، واتعلمنا إن الحب الحقيقي هو اتنين بيختاروا يفضلوا ماسكين في إيد بعض مهما كان.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">2025</div>
+            <div class="timeline-card">
+              <span class="timeline-date">سنة الحلم المشترك</span>
+              <h4 class="timeline-heading">كبرنا سوا وكبرت أحلامنا لمستقبلنا 🌟</h4>
+              <p>
+                بدأنا نبص لبكرة بنضج أكبر، نتخيل بيتنا وحياتنا وتفاصيل أيامنا الجاية، وبقيت متأكد إنك إنتِ الشخص اللي عايز أكمل حياتي جنبه.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item highlight-node">
+            <div class="timeline-dot">2026</div>
+            <div class="timeline-card">
+              <span class="timeline-date">سنة التتويج والحب المستمر</span>
+              <h4 class="timeline-heading">أربع سنين حب.. ولسه البداية 🕊️</h4>
+              <p>
+                أربع سنين عدوا، وحبك في قلبي مش بس ثابت.. ده بيزيد كل يوم، ونفسي الجاي كله يكون أحلى وأعظم بكتير من اللي فات.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="stage-actions">
+          <button class="btn-romantic-outline" onclick="goToStage(2)">السابق</button>
+          <button class="btn-romantic next-stage-btn" onclick="goToStage(4)">
+            <span>المرحلة التالية: حاجات بحبها في حموكشتي 💖</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ==================== المرحلة الرابعة: حاجات بحبها في حموكشتي ==================== -->
+      <div class="stage-block hidden-stage" id="stage-4">
+        <div class="stage-header">
+          <span class="stage-badge">المرحلة الرابعة</span>
+          <h3 class="stage-title">حاجات بحبها في حموكشتي 💖</h3>
+          <p class="stage-subtitle">في حاجات فيكي بتخطف قلبي كل يوم.. اضغطي على كل بطاقة لتكتشفيها!</p>
+          <div class="cards-discovered-tracker">
+            اكتشفتِ <span id="discoveredCount">0</span> من 6 أسباب 💕
+          </div>
+        </div>
+
+        <div class="love-reasons-grid">
+          
+          <!-- بطاقة 1 -->
+          <div class="flip-card" onclick="revealCard(this)">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="card-icon">✨</div>
+                <h4>ضحكتك الصافية</h4>
+                <p class="tap-hint">اضغطي هنا 👆</p>
+              </div>
+              <div class="flip-card-back">
+                <div class="card-icon-back">🥰</div>
+                <p>لما بتضحكي من قلبك، بحس إن كل تعب اليوم وهمومه تلاشت، ضحكتك دي أكسجين بيجدد روحي.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- بطاقة 2 -->
+          <div class="flip-card" onclick="revealCard(this)">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="card-icon">🕊️</div>
+                <h4>قلبك الطيب العفوي</h4>
+                <p class="tap-hint">اضغطي هنا 👆</p>
+              </div>
+              <div class="flip-card-back">
+                <div class="card-icon-back">💖</div>
+                <p>طيبة قلبك وعفويتك ونقاء نيتك، مفيش زيهم في الدنيا.. إنتِ إنسانة أصيلة وحقيقية في كل حاجة.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- بطاقة 3 -->
+          <div class="flip-card" onclick="revealCard(this)">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="card-icon">👁️</div>
+                <h4>عيونك وكلامها</h4>
+                <p class="tap-hint">اضغطي هنا 👆</p>
+              </div>
+              <div class="flip-card-back">
+                <div class="card-icon-back">👀</div>
+                <p>بتفهميني من نظرة واحدة، ولما ببص في عيونك بحس بأمان ملقيتوش عند أي حد تاني في العالم.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- بطاقة 4 -->
+          <div class="flip-card" onclick="revealCard(this)">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="card-icon">🏡</div>
+                <h4>إنك بيتي وأماني</h4>
+                <p class="tap-hint">اضغطي هنا 👆</p>
+              </div>
+              <div class="flip-card-back">
+                <div class="card-icon-back">🫂</div>
+                <p>معاكي مش محتاج أمثل أو أكون حد تاني، معاكي بكون بيتر على طبيعته بكل هدوء وراحة بال.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- بطاقة 5 -->
+          <div class="flip-card" onclick="revealCard(this)">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="card-icon">🌟</div>
+                <h4>صبرك واحتوائك</h4>
+                <p class="tap-hint">اضغطي هنا 👆</p>
+              </div>
+              <div class="flip-card-back">
+                <div class="card-icon-back">🌸</div>
+                <p>حتى في أوقات عصبيتي أو خوفي، بتعرفي تحتويني بهدوءك وصبرك وطيبتك اللي بتساع الكون.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- بطاقة 6 -->
+          <div class="flip-card" onclick="revealCard(this)">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="card-icon">👑</div>
+                <h4>إنك حموكشتي إنتِ</h4>
+                <p class="tap-hint">اضغطي هنا 👆</p>
+              </div>
+              <div class="flip-card-back">
+                <div class="card-icon-back">❤️</div>
+                <p>بحبك بكل تفاصيلك، بكل حاجة فيكي، بحبك إنتِ زي ما إنتِ، ومش هبدلك بكنوز الدنيا كلها.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="stage-actions">
+          <button class="btn-romantic-outline" onclick="goToStage(3)">السابق</button>
+          <button class="btn-romantic next-stage-btn" onclick="goToStage(5)">
+            <span>المرحلة التالية: لسه الحكاية مكملة 🌿</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ==================== المرحلة الخامسة: لسه الحكاية مكملة ==================== -->
+      <div class="stage-block hidden-stage" id="stage-5">
+        <div class="stage-header">
+          <span class="stage-badge">المرحلة الخامسة</span>
+          <h3 class="stage-title">لسه الحكاية مكملة 🌿</h3>
+          <p class="stage-subtitle">أحلامنا، بكرة، وكل حاجة جميلة مستنيانا نبنيها سوا</p>
+        </div>
+
+        <div class="future-vision-card glow-box">
+          <div class="future-icon-wrap">🕊️ 💍 🏡</div>
+          <h4>حلمي معاكي ملهوش نهاية</h4>
+          <p class="future-text">
+            نفسي أشوف اليوم اللي نبص فيه لورا بعد عشرات السنين، وإحنا شعرنا شاب سوا، ونفتكر بداية حكايتنا يوم 29 سبتمبر 2022،
+            ونضحك ونقول: "الحمد لله إننا اتمسكنا ببعض وبنينا البيت الجميل ده والحياة الهادية دي سوا".
+          </p>
+          <p class="future-text">
+            علاقتنا مش مجرد سنين بتعدي، علاقتنا وعد حقيقي مني ليكي، إني هفضل جنبك، أتعلم وأكبر وأكون السند والأمان والكتف اللي ترتاحي عليه دايمًا.
+          </p>
+
+          <div class="future-cta">
+            <button class="btn-romantic btn-pulse" onclick="proceedToMainMessage()">
+              <span>افتحي رسالتي ليكي من القلب 💌</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==============================================
+       3. الرسالة الأساسية (Screen 3: The Main Message)
+       ============================================== -->
+  <section id="letter-section" class="screen-section hidden-screen">
+    <div class="letter-outer-container">
+      
+      <div class="letter-header-tag">
+        <span class="envelope-stamp">من بيتر لحموكشتي ❤️</span>
+      </div>
+
+      <div class="letter-card parchment-paper glow-box">
+        <div class="letter-top-decor">
+          <span class="wax-seal">💌</span>
+        </div>
+
+        <h2 class="letter-title">
+          حموكشتي، عندي كلام كان نفسي أحكيهولك من زمان ❤️
+        </h2>
+
+        <!-- منطقة النص المكتوب بتأثير الآلة الكاتبة -->
+        <div class="typewriter-area" id="typewriterContainer">
+          <div id="typewriterText" class="letter-body"></div>
+          <span class="typewriter-cursor" id="typewriterCursor">|</span>
+        </div>
+
+        <!-- أدوات التحكم في الرسالة -->
+        <div class="letter-controls">
+          <button id="skipTypewriterBtn" class="btn-romantic-outline btn-sm">
+            <span>تخطي التأثير / عرض الرسالة كاملة 📜</span>
+          </button>
+          <button id="replayTypewriterBtn" class="btn-romantic-outline btn-sm" style="display: none;">
+            <span>إعادة تشغيل الكتابة 🔄</span>
+          </button>
+        </div>
+
+        <!-- زر الانتقال للمفاجآت بعد إتمام الرسالة -->
+        <div class="letter-next-action" id="letterNextBox">
+          <button class="btn-romantic btn-pulse" onclick="proceedToSurprises()">
+            <span>لسه في مفاجأة يا حموكشتي.. اضغطي هنا 🎁</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       4. المفاجآت التفاعلية (Screen 4: Surprises & Question)
+       ============================================== -->
+  <section id="surprise-section" class="screen-section hidden-screen">
+    <div class="surprise-container">
+      
+      <div class="surprise-header glow-box">
+        <span class="surprise-badge">مفاجأة خاصة جداً 🎁</span>
+        <h2 class="surprise-main-title">لسه في مفاجأة يا حموكشتي ❤️</h2>
+        <p class="surprise-subtitle">في سؤال واحد بس كان لازم أسألهولك بنفسي..</p>
+      </div>
+
+      <!-- السؤال التفاعلي -->
+      <div class="interactive-question-card glow-box" id="questionCard">
+        <div class="question-icon">💭</div>
+        <h3 class="q-title">"لو رجعنا لأول يوم في حكايتنا، كنتِ هتختاريني تاني؟"</h3>
+        
+        <div class="options-group">
+          <button class="option-btn option-yes" onclick="chooseOption('yes')">
+            <span class="opt-emoji">❤️</span>
+            <span class="opt-text">طبعًا يا بيتر ❤️</span>
+          </button>
+          <button class="option-btn option-tell" onclick="chooseOption('tell')">
+            <span class="opt-emoji">🥹</span>
+            <span class="opt-text">تعالى أقولك بنفسي 🥹</span>
+          </button>
+        </div>
+
+        <!-- الرد الرومانسي التفاعلي -->
+        <div class="reaction-result-box" id="reactionResult">
+          <!-- يملأ ديناميكياً بواسطة جافاسكريبت -->
+        </div>
+      </div>
+
+      <!-- المفاجأة النهائية الكبرى -->
+      <div class="final-reveal-box glow-box" id="finalRevealBox">
+        <div class="gift-box-anim" id="giftBoxTrigger" onclick="unlockFinalSurprise()">
+          <div class="gift-icon">🎁</div>
+          <p class="gift-prompt">اضغطي هنا لفتح هديتي الأخيرة ليكي 🎀</p>
+        </div>
+
+        <div class="final-gift-content" id="finalGiftContent" style="display: none;">
+          <div class="couple-final-frame">
+            <img id="finalPhoto" src="images/final-couple.jpg" alt="بيتر وحموكشتي معاً" onerror="handleImageError(this, 'final')">
+          </div>
+          <div class="final-love-note">
+            <h4 class="note-title">لكل الأيام الجاية يا كل حياتي..</h4>
+            <p>
+              يا حموكشتي، مهما كتبت ومهما عبرت، قلبي هيفضل شايلك حب أكبر بكتير من أي كلام.
+              وجودك في حياتي نعمة بشكر ربنا عليها كل يوم، وأوعدك أفضل السند والضهر ليكي لآخر العمر. ❤️
+            </p>
+            <span class="signature">حبيبك وملاذك.. بيتر عيسى ✍️</span>
+          </div>
+
+          <div class="to-cinematic-action">
+            <button class="btn-romantic btn-pulse" onclick="proceedToCinematic()">
+              <span>إلى ختام حكايتنا السينمائي ✨</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==============================================
+       5. النهاية السينمائية (Screen 5: Cinematic Ending)
+       ============================================== -->
+  <section id="cinematic-section" class="screen-section hidden-screen">
+    <div class="cinematic-backdrop">
+      
+      <!-- عناصر النجوم والقلوب السينمائية -->
+      <div class="shooting-star"></div>
+      <div class="shooting-star"></div>
+      <div class="shooting-star"></div>
+
+      <div class="cinematic-content glow-box">
+        
+        <div class="cinematic-crown">👑 ❤️ 👑</div>
+
+        <!-- سلايدشو الصور الرومانسي الناعم -->
+        <div class="cinematic-slideshow-container">
+          <div class="slide active-slide">
+            <img src="images/beginning.jpg" alt="بيتر وحموكشتي" onerror="handleImageError(this, 'beginning')">
+          </div>
+          <div class="slide">
+            <img src="images/memory1.jpg" alt="بيتر وحموكشتي" onerror="handleImageError(this, 'memory1')">
+          </div>
+          <div class="slide">
+            <img src="images/final-couple.jpg" alt="بيتر وحموكشتي" onerror="handleImageError(this, 'final')">
+          </div>
+        </div>
+
+        <!-- الرسالة الختامية المؤثرة -->
+        <div class="cinematic-message-box">
+          <h2 class="cinematic-lead">يا حموكشتي ❤️</h2>
+          
+          <div class="cinematic-paragraphs">
+            <p>لو وصلتي لحد هنا، فعايزك تعرفي إن الموقع ده مش مجرد صور وكلام.</p>
+            <p>ده جزء صغير من اللي جوايا ناحيتك، ومن الحاجات اللي نفسي أعيشها معاكي.</p>
+            <p class="highlight-date">حكايتنا بدأت يوم 29/9/2022، ونفسي نفضل نكتب فيها فصول جديدة.</p>
+          </div>
+
+          <div class="cinematic-signoff">
+            <p class="signoff-from">من بيتر لحموكشتي..</p>
+            <p class="signoff-love">بحبك، ونفسي أجمل أيامنا تكون لسه جاية. ❤️</p>
+          </div>
+        </div>
+
+        <!-- أزرار ختامية -->
+        <div class="cinematic-actions">
+          <button class="btn-romantic-outline" onclick="restartJourney()">
+            <span>نعيش الرحلة من الأول 🔄</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==============================================
+       مودال تكبير الصور (Lightbox Modal)
+       ============================================== -->
+  <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox(event)">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightboxDirect()" aria-label="إغلاق">&times;</button>
+      <div class="lightbox-img-wrap">
+        <img id="lightboxImage" src="" alt="صورة مكبرة">
+      </div>
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
+  <!-- صوتيات وتأثيرات JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
